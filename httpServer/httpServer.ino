@@ -10,10 +10,10 @@
 
 // Motor control pins (emulated L9110)
 struct MotorPins { int pwmPin, dirPin; } motors[4] = {
-  {12, 14}, {13, 15}, {3, 1}, {4, 5}
+   {3, 1}, {12, 14},  {4, 5}, {13, 16}
 };
 
-const int SPEED = 180; 
+const int SPEED = 350; 
 
 // #include <math.h>
 // const int x_out = 1; /* connect x_out of module */
@@ -115,12 +115,18 @@ void moveUp() {
 
   // analogWrite(13, 0);                  
   analogWrite(motors[i].pwmPin, 255);             
-  analogWrite(motors[i].dirPin, SPEED);            
-  // analogWrite(14, 0);    
+  // if (i % 2== 0) { 
+  // analogWrite(motors[i].dirPin, SPEED * (i * 0.3));     
+  // }        else {
+
+  // analogWrite(motors[i].dirPin, SPEED * (i * 0.4)); 
+  // }
+  // analogWrite(motors[i].dirPin, 0);    
+  // analogWrite(motors[i].dirPin, 0);    
   }
 
 
-  delay(5000);
+  delay(50000);
   for (int i=0; i<4; i++) {
     analogWrite(motors[i].pwmPin, 0);
     analogWrite(motors[i].dirPin, 0);
